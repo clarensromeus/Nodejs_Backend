@@ -1,16 +1,29 @@
 
-Get http://localhost:4000/login/2
+Get http://localhost:4000
 
 ###
 
-POST http://localhost:4000/register
+POST http://localhost:4000/gettoken
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhcmFjayBvYmFtYSIsInBhc3N3b3JkIjoiMi1lbGVjdG9yYWwgb2xkIHByZXNpZGVudCBvZiB1c2EiLCJpYXQiOjE2NzcxMDQ4MjMsImlzcyI6ImJhcmFjayBvYmFtYSIsInN1YiI6InBlcnNvbmFsIHRva2VuIn0.pgXcpdz5g53QiklEwsdNvmfPT02lfpiYZAUz64ZM-bmTa5xWttgYKCJC38-f1_WV
 
-Content-Type: application/x-www-form-urlencoded
+###
+
+POST http://localhost:4000/login/student
+Content-Type: application/json
+
+{
+  "username": "barack obama",
+  "password": "2-electoral old president of usa"
+}
+
+###
+
+POST http://localhost:4000/student/12
+Content-Type: application/json
 
 {    
-  "name": "engineer",
-  "age": "25",
-  "proff": "software engineer"
+  "username": "romeus clarens",
+  "password": "clarens"
 }
 
 ###

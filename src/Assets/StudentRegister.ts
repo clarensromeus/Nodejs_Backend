@@ -1,25 +1,39 @@
 interface IstudentInfo<S> {
-  firstname: S;
-  lastname: S;
-  email: S;
-  password: S;
-  confirmPassword: S;
+  Firstname: S;
+  Lastname: S;
+  Email: S;
+  Password: S;
+  ConfirmPassword: S;
 }
 
-interface IGetInfo {
-  getStudentInfo: shortenStud<string>;
+interface IGetInfo<T> {
+  setStudentInfo: addStud<T>;
+  getStudentInfo: shortenStud;
 }
 
-type shortenStud<T> = {
-  (info: IstudentInfo<T>): void;
+type shortenStud = {
+  (): object;
 };
 
-function AdminStudent<U>(statusKey: U) {
-  return class Student implements IGetInfo {
-    private studentInfo: Record<string, IstudentInfo<string>> = {};
+type addStud<T> = {
+  (stud: Record<string, IstudentInfo<T>>): void;
+};
 
-    getStudentInfo(info: IstudentInfo<string>): void {}
+function StudentRegisteration<T>(statusKey: T) {
+  return class Student implements IGetInfo<T> {
+    private studentInfo: Record<string, IstudentInfo<T>> = {};
+
+    public setStudentInfo(stud: Record<string, IstudentInfo<T>>): void {
+      this.studentInfo = stud;
+    }
+
+    public getStudentInfo(): object {
+      return this.studentInfo;
+    }
   };
 }
 
-export default AdminStudent;
+export default StudentRegisteration;
+
+// i am creating a class to get access to Student Registeration credentials
+// and get them via the GetStudentInfo method declared in the class
