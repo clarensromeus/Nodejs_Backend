@@ -18,7 +18,7 @@ import bcryptjs from "bcryptjs";
 import { promisify } from "util";
 import passport from "passport";
 
-const { info } = consola;
+const { info, success } = consola;
 
 const BCRYPT_SALT = promisify(bcryptjs.genSalt).bind(bcryptjs);
 const BCRYPT_HASH = promisify(bcryptjs.hash).bind(bcryptjs);
@@ -172,85 +172,6 @@ export const tokenVerification = async (
   }
 };
 
-// FACEBOOK Authentication steps
-// /auth/facebook route
-export async function FACEBOOK_LOGIN() {
-  try {
-    await passport.authenticate("facebook", {
-      scope: ["public_profile", "email"],
-      session: false, // manage session with REDIS and Localstorage instead
-    });
-  } catch (error) {
-    throw Error(`${error}`);
-  }
-}
-
-// route for returning failure or success message
-// /auth/facebook/callback
-export async function FACEBOOK_CALLBACK() {
-  await passport.authenticate("facebook", {
-    failureRedirect: "/login",
-    failureMessage: true,
-  }),
-    async function (req: Request, res: Response) {
-      // Successful authentication, redirect home.
-      try {
-        res.redirect("/home");
-      } catch (error) {
-        throw Error(`${error}`);
-      }
-    };
-}
-
-// GOOGLE Auth
-// login/Google route
-export async function GOOGLE_LOGIN() {
-  try {
-    await passport.authenticate("google");
-  } catch (error) {
-    throw Error(`${error}`);
-  }
-}
-
-// route for returning failure or success callback
-// auth/google/callback
-export async function GOOGLE_CALLBACK() {
-  await passport.authenticate("google", {
-    failureRedirect: "/login",
-    failureMessage: true,
-  }),
-    async function (req: Request, res: Response) {
-      try {
-        res.redirect("/");
-      } catch (error) {
-        throw Error(`${error}`);
-      }
-    };
-}
-
-// GITHUB Auth
-// auth/github route
-export async function GITHUB_LOGIN() {
-  try {
-    await passport.authenticate("github");
-  } catch (error) {
-    throw Error(`${error}`);
-  }
-}
-// route for returning failure or success callback
-// auth/github/callback
-export async function GITHUB_CALLBACK() {
-  await passport.authenticate("github", { failureRedirect: "/github/fail" }),
-    async function (req, res) {
-      // Successful authentication, redirect home.
-      try {
-        res.redirect("/");
-      } catch (error) {
-        throw Error(`${error}`);
-      }
-    };
-}
-
 // SENDMAIL with nodemailer
 export const SendingMail = async (
   req: Request,
@@ -278,9 +199,14 @@ export const SendPhoneVerification = async (
   // REDIS_CLIENT.SET("username", req.body.username);
 
   try {
-    const { DESTINATION, SUBJECT, HTMLBODY, MESSAGE } = await req.body;
+    //const { DESTINATION, SUBJECT, HTMLBODY, MESSAGE } = await req.body;
     // providing mail info
     await SendPhone_Verification();
+    await res
+      .status(200)
+      .json({
+        message: success({ message: "sms sent with success", badge: true }),
+      });
   } catch (error) {
     throw CreateError.Unauthorized(`${error}`);
   }

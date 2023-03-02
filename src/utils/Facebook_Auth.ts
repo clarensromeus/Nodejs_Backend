@@ -6,7 +6,7 @@ import { REDIS_CLIENT } from "../constants/index";
 
 dotenv.config({ override: true });
 
-const { FACEBOOK_ID, FACEBOOK_SECRET } = process.env;
+const { FACEBOOK_ID, FACEBOOK_SECRET, FACEBOOK_CALLBACK_URI } = process.env;
 
 REDIS_CLIENT.on("error", (error) => {
   console.log(error);
@@ -18,7 +18,7 @@ passport.use(
     {
       clientID: `${FACEBOOK_ID}`,
       clientSecret: `${FACEBOOK_SECRET}`,
-      callbackURL: "http://localhost:4000/auth/facebook/callback",
+      callbackURL: `${FACEBOOK_CALLBACK_URI}`,
       profileFields: ["id", "displayName", "name", "email", "photos"],
     },
     // @ts-ignore

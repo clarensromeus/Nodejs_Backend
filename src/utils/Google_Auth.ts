@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config({ override: true }); // override any env variable similar  to those of the main module
 
-const { GOOGLE_ID, GOOGLE_SECRET } = process.env;
+const { GOOGLE_ID, GOOGLE_SECRET, GOOGLE_CALLBACK_URI } = process.env;
 
 const Server: Express = express();
 
@@ -15,7 +15,7 @@ passport.use(
     {
       clientID: `${GOOGLE_ID}`, // get ID on Google developper platform
       clientSecret: `${GOOGLE_SECRET}`, // get SECRET on Google developer platform
-      callbackURL: "/auth/google/callback",
+      callbackURL: `${GOOGLE_CALLBACK_URI}`,
       scope: ["profile"],
       state: true,
     },
