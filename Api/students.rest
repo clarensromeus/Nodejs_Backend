@@ -4,7 +4,7 @@ Get http://localhost:4000
 ###
 
 POST http://localhost:4000/gettoken
-Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhcmFjayBvYmFtYSIsInBhc3N3b3JkIjoiMi1lbGVjdG9yYWwgb2xkIHByZXNpZGVudCBvZiB1c2EiLCJpYXQiOjE2NzcxMDQ4MjMsImlzcyI6ImJhcmFjayBvYmFtYSIsInN1YiI6InBlcnNvbmFsIHRva2VuIn0.pgXcpdz5g53QiklEwsdNvmfPT02lfpiYZAUz64ZM-bmTa5xWttgYKCJC38-f1_WV
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJ1c2VybmFtZSI6ImJhcmFjayBvYmFtYSIsInBhc3N3b3JkIjoiMi1lbGVjdG9yYWwgb2xkIHByZXNpZGVudCBvZiB1c2EifSwiaWF0IjoxNjc3MTgwMzk5LCJpc3MiOiJiYXJhY2sgb2JhbWEiLCJzdWIiOiJwZXJzb25hbCB0b2tlbiJ9.6Z8XjA2Cfv3Yezr_jzD66ENybv5DUwIVHhT5H2yXAFs1NdEudcNI3HIhVtvaSC9V
 
 ###
 
@@ -18,13 +18,36 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:4000/student/12
+POST http://localhost:4000/register/12
 Content-Type: application/json
 
 {    
-  "username": "romeus clarens",
-  "password": "clarens"
+  "Firstname": "paul",
+  "Lastname": "beverly",
+  "Email": "paulBeverly10@gmail.com",
+  "Password": "Beverly(+-1998)",
+  "ConfirmPassword": "Beverly(+-1998)"
 }
 
 ###
-GET http://localhost:4000
+POST  http://localhost:4000/student
+Content-Type: application/json
+
+{
+  "username": "prophete allrich",
+  "password": "clarens(+-1998)"
+}
+
+###
+POST  http://localhost:4000/sendmail
+Content-Type: application/json
+
+{
+  "DESTINATION": "romeusclarens10@gmail.com",
+  "SUBJECT": "sending email confirmation",
+  "HTMLBODY": "<a hre=http://localhost:4000>login<a>",
+  "MESSAGE": "HELLO TECH ADMIN GREET YOU"
+}
+
+###
+GET http://localhost:4000/sendphone

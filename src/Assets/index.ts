@@ -1,3 +1,4 @@
 import { IGetUserAuthInfoRequest } from "./globalTypes";
+import { StudentRegisteration } from "./StudentRegister";
 
-export { IGetUserAuthInfoRequest };
+export { IGetUserAuthInfoRequest, StudentRegisteration };

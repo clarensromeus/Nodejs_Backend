@@ -19,7 +19,7 @@ type addStud<T> = {
   (stud: Record<string, IstudentInfo<T>>): void;
 };
 
-function StudentRegisteration<T>(statusKey: T) {
+export function StudentRegisteration<T>(statusKey: T) {
   return class Student implements IGetInfo<T> {
     private studentInfo: Record<string, IstudentInfo<T>> = {};
 
@@ -32,8 +32,6 @@ function StudentRegisteration<T>(statusKey: T) {
     }
   };
 }
-
-export default StudentRegisteration;
 
 // i am creating a class to get access to Student Registeration credentials
 // and get them via the GetStudentInfo method declared in the class
