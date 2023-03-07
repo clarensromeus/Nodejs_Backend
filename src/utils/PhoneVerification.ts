@@ -11,7 +11,7 @@ export const SendPhone_Verification = () => {
   if (TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN && TWILIO_PHONE_NUMBER) {
     return client.messages
       .create({
-        from: `${TWILIO_PHONE_NUMBER}`, // or an sender ID if a verified number like ==> FACEBOOK
+        from: `${TWILIO_PHONE_NUMBER}`, // or a sender ID if a verified and ugraded number like ==> FACEBOOK, AMAZON etc..
         to: `${MY_NUMBER}`,
         body: "code: 4545clarens",
       })

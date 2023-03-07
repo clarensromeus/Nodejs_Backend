@@ -8,34 +8,24 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJ1c2Vyb
 
 ###
 
-POST http://localhost:4000/login/student
-Content-Type: application/json
-
-{
-  "username": "barack obama",
-  "password": "2-electoral old president of usa"
-}
-
-###
-
 POST http://localhost:4000/register/12
 Content-Type: application/json
 
 {    
-  "Firstname": "paul",
-  "Lastname": "beverly",
-  "Email": "paulBeverly10@gmail.com",
-  "Password": "Beverly(+-1998)",
-  "ConfirmPassword": "Beverly(+-1998)"
+  "Firstname": "romeus",
+  "Lastname": "clarens",
+  "Email": "romeusclarens10@gmail.com",
+  "Password": "clarens(+-1998)",
+  "ConfirmPassword": "clarens(+-1998)"
 }
 
 ###
-POST  http://localhost:4000/student
+POST  http://localhost:4000/login/student
 Content-Type: application/json
 
 {
   "username": "prophete allrich",
-  "password": "clarens(+-1998)"
+  "password": "Clarens(+-1998)"
 }
 
 ###

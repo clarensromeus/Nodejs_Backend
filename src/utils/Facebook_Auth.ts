@@ -18,7 +18,7 @@ passport.use(
     {
       clientID: `${FACEBOOK_ID}`,
       clientSecret: `${FACEBOOK_SECRET}`,
-      callbackURL: `${FACEBOOK_CALLBACK_URI}`,
+      callbackURL: "http://localhost:4000/auth/facebook/callback",
       profileFields: ["id", "displayName", "name", "email", "photos"],
     },
     // @ts-ignore

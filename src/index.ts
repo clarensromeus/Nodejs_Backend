@@ -25,12 +25,13 @@ import {
 dotenv.config({ override: true });
 
 const Server: Express = express();
-
+// FACEBOOK auth somehow require to use session if we want i to work in a perfect way even we can use
+// another way to store already-used data for one-way authentication
 Server.use(
   session({
     secret: "my secret",
-    // resave: false, // do not resave session i unmodified
-    // saveUninitialized: false, // don't create session until something stored
+    resave: false, // do not resave session i unmodified
+    saveUninitialized: false, // don't create session until something stored
   })
 );
 const { PORT, FACEBOOK_ID, FACEBOOK_SECRET } = process.env;
@@ -55,12 +56,11 @@ const options: cors.CorsOptions = {
   credentials: true,
   methods: "GET,HEAD,OPTIONS,PUT,POST,DELETE",
   origin: true,
-  //origin: "*",
   optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
   preflightContinue: false,
 };
 // use for setting CROSS ORIGIN RESSOURCES SHARING between the server and the client
-//Server.use(cors(options));
+Server.use(cors(options));
 // recording response time for every request in http servers
 Server.use(responseTime());
 // using body-parser for parsing incoming request bodies to the Express Middlewares
@@ -74,10 +74,8 @@ Server.use(
 // initialize passport
 Server.use(passport.initialize());
 
-Server.post("/login/student", StudentLogin);
-Server.post("/login/admin");
-Server.post("/register/student/:status", StudentRegister);
-Server.post("/register/admin/:status");
+Server.post("/login/:status", StudentLogin);
+Server.post("/register/:status", StudentRegister);
 
 // FACEBOOK route
 Server.get(

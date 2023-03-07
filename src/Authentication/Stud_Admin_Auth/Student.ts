@@ -9,6 +9,8 @@ import {
 import { RegisterModel } from "../../models/index";
 import { SendPhone_Verification } from "../../utils/PhoneVerification";
 import { sendMail } from "../../utils/SendMail";
+import { isStudent } from "../../students";
+import { UseRandomStudent } from "../../SeedStudents";
 // external imports of sources
 import { Request, Response, NextFunction } from "express";
 import CreateError from "http-errors";
@@ -17,6 +19,8 @@ import consola from "consola";
 import bcryptjs from "bcryptjs";
 import { promisify } from "util";
 import passport from "passport";
+import * as redis from "redis";
+import { faker } from "@faker-js/faker";
 
 const { info, success } = consola;
 
@@ -55,9 +59,12 @@ export const StudentRegister = async (
     // const Is_valid = StudentRegisterValidation()
 
     // creating a salt of 20 bytes at the maximum for protecting against brute-force attack
-    const hash = await bcryptjs.genSalt(10);
-    const PasswHash = await bcryptjs.hash(Password, hash);
-    const ConfirmPasswHash = await bcryptjs.hash(ConfirmPassword, hash);
+    //@ts-ignore
+    const hash: number = await BCRYPT_SALT(10);
+    //@ts-ignore
+    const PasswHash = await BCRYPT_HASH(Password, hash);
+    //@ts-ignore
+    const ConfirmPasswHash = await BCRYPT_HASH(ConfirmPassword, hash);
 
     // user credentials
     const stud = {
@@ -70,8 +77,11 @@ export const StudentRegister = async (
       },
     };
 
-    // store credentials to the database
+    if (isStudent({ __status: `${statusKey}`, data: stud["student"] })) {
+      console.log();
+    }
 
+    // store credentials to the database
     const Is_valid = await StudentRegisterValidation(stud["student"]);
 
     if (Is_valid) {
@@ -115,17 +125,19 @@ export const StudentLogin = async (
     const { username, password }: ISLogin<string> = await req.body;
     console.log(username, password);
 
+    const status = await req.params.status;
+
     // check if credentials are of good types
     const Is_valid = await StudentLoginValidation(username, password);
     consola.warn({ message: Is_valid });
 
     const token = Is_valid && (await tokenAuth(Is_valid, username));
     // const token = await tokenAuth({ username, password }, username);
-    console.log(token);
+    // const rs = await UseRandomStudent();
 
     console.log(` token is ${token}`);
 
-    return res.status(200).json({ ACCESS_TOKEN: token });
+    return res.status(200).json({ ACCESS_TOKEN: token, status });
   } catch (error) {
     CreateError.NotFound(`error is because of ${error}`);
     next(error);
@@ -202,11 +214,9 @@ export const SendPhoneVerification = async (
     //const { DESTINATION, SUBJECT, HTMLBODY, MESSAGE } = await req.body;
     // providing mail info
     await SendPhone_Verification();
-    await res
-      .status(200)
-      .json({
-        message: success({ message: "sms sent with success", badge: true }),
-      });
+    await res.status(200).json({
+      message: success({ message: "sms sent with success", badge: true }),
+    });
   } catch (error) {
     throw CreateError.Unauthorized(`${error}`);
   }
