@@ -4,22 +4,46 @@ type IData<T> = {
   Email: T;
   Password: T;
   ConfirmPassword: T;
+  Image?: T;
+  SchoolLevel: T;
 };
 
 interface Admin<T> {
   __status: "admin" | string;
-  data: IData<T>;
+  Info: IData<T>;
 }
 
 interface Student<S> {
   __status: "student" | string;
-  data: IData<S>;
+  Info: IData<S>;
 }
 
 type Student_or_Admin<T> = Admin<T> | Student<T>;
 
 export const isStudent = (
-  data: Student_or_Admin<string>
-): data is Student<string> => {
-  return data.__status === "student";
+  Info: Student_or_Admin<string>
+): Info is Student<string> => {
+  return Info.__status === "student";
+};
+
+type UsernameOrEmail = "Username" | "Email";
+type studentLogin<T> = {
+  username: T;
+  password: T;
+};
+
+interface AdminLog<T> {
+  __status: "admin" | string;
+  Data: studentLogin<T>;
+}
+
+interface StudentLog<S> {
+  __status: "student" | string;
+  Data: studentLogin<S>;
+}
+
+export const isStudentLogin = (
+  Info: StudentLog<string> | AdminLog<string>
+): Info is StudentLog<string> => {
+  return Info.__status === "student";
 };

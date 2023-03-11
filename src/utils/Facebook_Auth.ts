@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import passport from "passport";
 import { Strategy as FacebookStrategy } from "passport-facebook";
-import { RegisterModel } from "../models/index";
 import { REDIS_CLIENT } from "../constants/index";
 
 dotenv.config({ override: true });

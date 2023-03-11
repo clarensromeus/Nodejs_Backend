@@ -4,14 +4,15 @@ import { promisify } from "util";
 
 dotenv.config();
 
-const BCRYPT_TOKEN = promisify(jwt.sign).bind(jwt);
+const JWT_WEB_TOKEN = promisify(jwt.sign).bind(jwt);
+const JWT_VERIFY_TOKEN = promisify(jwt.verify).bind(jwt);
 
 const Access_Token = process.env.ACCESS_TOKEN;
 
 export const tokenAuth = async (data: object, issuer: string) => {
   // const token = await jwt.sign(data, `${Access_Token}`, {
   //@ts-ignore
-  const token = await BCRYPT_TOKEN(data, `${Access_Token}`, {
+  const token = await JWT_WEB_TOKEN(data, `${Access_Token}`, {
     algorithm: "HS384",
     issuer,
     subject: "personal token",

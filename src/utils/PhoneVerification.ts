@@ -13,7 +13,7 @@ export const SendPhone_Verification = () => {
       .create({
         from: `${TWILIO_PHONE_NUMBER}`, // or a sender ID if a verified and ugraded number like ==> FACEBOOK, AMAZON etc..
         to: `${MY_NUMBER}`,
-        body: "code: 4545clarens",
+        body: "code: 4545clerville",
       })
       .then((message) => console.log(message));
   } else {

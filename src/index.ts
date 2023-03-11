@@ -11,8 +11,7 @@ import responseTime from "response-time";
 import session from "express-session";
 // internal crafted imports of sources
 import { SERVER_RUNNING_MESSAGE, REDIS_CLIENT } from "./constants/index";
-import * as Auth from "./Authentication/Stud_Admin_Auth/index";
-import { tokenAuth } from "./utils/Auth";
+import * as Auth from "./Route/Stud_Admin_Auth/index";
 import { DB_CONNECTION } from "./utils/index";
 import "./utils/Facebook_Auth";
 import "./utils/Google_Auth";
@@ -20,7 +19,7 @@ import "./utils/Github_Auth";
 import {
   SendingMail,
   SendPhoneVerification,
-} from "./Authentication/Stud_Admin_Auth/Student";
+} from "./Route/Stud_Admin_Auth/StudentAdmin_auth";
 
 dotenv.config({ override: true });
 
@@ -37,13 +36,7 @@ Server.use(
 const { PORT, FACEBOOK_ID, FACEBOOK_SECRET } = process.env;
 const ServerPort = PORT || 5000;
 
-const {
-  StudentRegister,
-  AdminRegister,
-  StudentLogin,
-  tokenVerification,
-  studentInfo,
-} = Auth;
+const { StudentAdminRegister, StudentAdminLogin, tokenVerification } = Auth;
 
 const options: cors.CorsOptions = {
   allowedHeaders: [
@@ -74,9 +67,11 @@ Server.use(
 // initialize passport
 Server.use(passport.initialize());
 
-Server.post("/login/:status", StudentLogin);
-Server.post("/register/:status", StudentRegister);
-
+Server.post("/login/:status", tokenVerification, StudentAdminLogin);
+Server.post("/register/:status", StudentAdminRegister);
+Server.get("token", tokenVerification, (req: Request, res: Response) => {
+  res.status(200).json({ message: "run fine" });
+});
 // FACEBOOK route
 Server.get(
   "/auth/facebook",
@@ -120,7 +115,7 @@ Server.get(
     try {
       res.redirect("/");
     } catch (error) {
-      throw new createError.Unauthorized(`${error}`);
+      throw new createError.NotFound(`${error}`);
     }
   }
 );
@@ -163,7 +158,7 @@ const ServerStartup = async (message: string) => {
       });
     });
   } catch (err) {
-    throw createError.Conflict(`${err}`);
+    throw new Error(`${err}`);
   } finally {
     consola.info({
       message: "Server is launching",

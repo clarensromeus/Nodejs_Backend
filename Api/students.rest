@@ -4,28 +4,29 @@ Get http://localhost:4000
 ###
 
 POST http://localhost:4000/gettoken
-Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJ2YWx1ZSI6eyJ1c2VybmFtZSI6ImJhcmFjayBvYmFtYSIsInBhc3N3b3JkIjoiMi1lbGVjdG9yYWwgb2xkIHByZXNpZGVudCBvZiB1c2EifSwiaWF0IjoxNjc3MTgwMzk5LCJpc3MiOiJiYXJhY2sgb2JhbWEiLCJzdWIiOiJwZXJzb25hbCB0b2tlbiJ9.6Z8XjA2Cfv3Yezr_jzD66ENybv5DUwIVHhT5H2yXAFs1NdEudcNI3HIhVtvaSC9V
-
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJfSURfVXNlciI6ImJpbDc2NzkxdGVzIiwiRmlyc3RuYW1lIjoiYmlsbCIsIkxhc3RuYW1lIjoiZ2F0ZXMiLCJFbWFpbCI6ImJpbGxnYXRlczMwQGdtYWlsLmNvbSIsIlBhc3N3b3JkIjoiJDJhJDEwJG1qb21wY2I2U2pReS9BYUtKei5KWmU4cmVxb0NhWi9LM2xYR1hHc29peHZaQnEucGxFTDA2IiwiQ29uZmlybVBhc3N3b3JkIjoiJDJhJDEwJG1qb21wY2I2U2pReS9BYUtKei5KWmU4cmVxb0NhWi9LM2xYR1hHc29peHZaQnEucGxFTDA2IiwiSW1hZ2UiOiIiLCJpYXQiOjE2NzgzOTQxMzksImlzcyI6ImJpbGwgZ2F0ZXMiLCJzdWIiOiJwZXJzb25hbCB0b2tlbiJ9.F7ZM_dTgOkFmxRjHW_SC4tJaRN_uSq4Ze2EH9ME94Z0UuL8kwvDZMfibK4TIrF3X
 ###
 
-POST http://localhost:4000/register/12
+POST http://localhost:4000/register/student
 Content-Type: application/json
 
 {    
-  "Firstname": "romeus",
-  "Lastname": "clarens",
-  "Email": "romeusclarens10@gmail.com",
-  "Password": "clarens(+-1998)",
-  "ConfirmPassword": "clarens(+-1998)"
+  "Firstname": "prophete",
+  "Lastname": "allrich",
+  "Email": "propheteallrich7@gmail.com",
+  "Password": "Allrich(+-1998)",
+  "ConfirmPassword": "Allrich(+-1998)",
+  "Image": ""
 }
 
 ###
 POST  http://localhost:4000/login/student
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJfSURfVXNlciI6InBybzgyMTIxaWNoIiwiRmlyc3RuYW1lIjoicHJvcGhldGUiLCJMYXN0bmFtZSI6ImFsbHJpY2giLCJFbWFpbCI6InByb3BoZXRlYWxscmljaDdAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmEkMTAkbmQ0b2NhalFSSUZjcGU3ZWdZVDdQLm10UTZXcGtFV1cvUDQwQTcwLlBHRlpxQXUuRDRaVlciLCJDb25maXJtUGFzc3dvcmQiOiIkMmEkMTAkbmQ0b2NhalFSSUZjcGU3ZWdZVDdQLm10UTZXcGtFV1cvUDQwQTcwLlBHRlpxQXUuRDRaVlciLCJJbWFnZSI6IiIsIlNjaG9vbExldmVsIjoicHJpbWFyeSBzY2hvb2wiLCJpYXQiOjE2Nzg0NjA1MjMsImlzcyI6InByb3BoZXRlIGFsbHJpY2giLCJzdWIiOiJwZXJzb25hbCB0b2tlbiJ9.jog6qib4npx7uchQRcdt4EUGOTIGP7z-99CpLN7a-GlAq4hvx4DPc0HKIUCgGYr9
 
 {
   "username": "prophete allrich",
-  "password": "Clarens(+-1998)"
+  "password": "Allrich(+-1998)"
 }
 
 ###

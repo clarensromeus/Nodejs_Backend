@@ -1,3 +1,4 @@
-import { RegisterModel } from "./Student";
+import { RegisterModelStudent } from "./Student";
+import { RegisterModelAdmin } from "./Admin";
 
-export { RegisterModel };
+export { RegisterModelStudent, RegisterModelAdmin };

@@ -4,16 +4,18 @@ const { Schema } = mongoose;
 
 // Register Types
 interface IRegister<S> {
-  _ID: mongoose.Types.ObjectId;
+  _ID_User: string;
   Firstname: S;
   Lastname: S;
   Email: S;
   Password: S;
   ConfirmPassword: S;
+  Image?: S;
+  SchoolLevel: S;
 }
 
 export const SchemaRegister = new Schema<IRegister<string>>({
-  _ID: mongoose.Schema.Types.ObjectId,
+  _ID_User: { type: String, required: true, trim: true },
   Firstname: {
     type: String,
     required: true,
@@ -35,4 +37,6 @@ export const SchemaRegister = new Schema<IRegister<string>>({
     trim: true,
   },
   ConfirmPassword: { type: String, required: true, trim: true },
+  Image: { type: String, trim: true },
+  SchoolLevel: { type: String, trim: true },
 });

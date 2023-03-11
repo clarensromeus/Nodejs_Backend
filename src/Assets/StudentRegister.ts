@@ -1,9 +1,12 @@
 interface IstudentInfo<S> {
+  _ID_User: S;
   Firstname: S;
   Lastname: S;
   Email: S;
   Password: S;
   ConfirmPassword: S;
+  Image?: S;
+  SchoolLevel: S;
 }
 
 interface IGetInfo<T> {

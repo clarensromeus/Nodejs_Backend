@@ -1,5 +1,5 @@
 import * as mongoose from "mongoose";
-import { SchemaRegister } from "../schema/index";
+import { StudentSchema } from "../schema/index";
 
 // Register Types
 interface IRegister<S> {
@@ -9,11 +9,13 @@ interface IRegister<S> {
   Email: S;
   Password: S;
   ConfirmPassword: S;
+  Image: S;
+  SchoolLevel: S;
 }
 
 const { model } = mongoose;
 
-export const RegisterModel = model<IRegister<string>>(
-  "Register",
-  SchemaRegister
+export const RegisterModelStudent = model<IRegister<string>>(
+  "Student",
+  StudentSchema
 );

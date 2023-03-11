@@ -1,3 +1,4 @@
-import {  SchemaRegister } from "./Student";
+import { SchemaRegister as StudentSchema } from "./Student";
+import { SchemaRegister as AdminSchema } from "./Admin";
 
-export {  SchemaRegister };
+export { StudentSchema, AdminSchema };

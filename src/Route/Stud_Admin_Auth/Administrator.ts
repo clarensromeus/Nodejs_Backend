@@ -1,4 +1,4 @@
-// external imports of sources
+/* // external imports of sources
 import { Request, Response, NextFunction } from "express";
 import CreateError from "http-errors";
 import jwt from "jsonwebtoken";
@@ -16,11 +16,13 @@ interface Istuds<T> {
 const studs: Istuds<string>[] = [];
 
 interface ISRegister<S> {
+  _ID_User: S;
   Firstname: S;
   Lastname: S;
   Email: S;
   Password: S;
   ConfirmPassword: S;
+  image?: S;
 }
 
 const AdminRegister = async (
@@ -76,3 +78,4 @@ export default AdminRegister;
 // and after i use the hash method to hash the password
 // like so --> hash(password,salt)
 // generated already in the above code
+ */

@@ -1,9 +1,11 @@
 interface IadminInfo<S> {
+  _ID_User: S;
   Firstname: S;
   Lastname: S;
   Email: S;
   Password: S;
   ConfirmPassword: S;
+  Image?: S;
 }
 
 interface IGetInfo<T> {
@@ -19,7 +21,7 @@ type addAmin<T> = {
   (stud: Record<string, IadminInfo<T>>): void;
 };
 
-function AdminRegisteration<U, T>(statusKey: U) {
+export function AdminRegisteration<U, T>(statusKey: U) {
   return class Admin implements IGetInfo<T> {
     private AdminInfo: Record<string, IadminInfo<T>> = {};
 
